@@ -41,23 +41,15 @@ pub fn image_to_onnx_input(image: DynamicImage) -> Array4<f32> {
 // }
 
 pub fn crop_square(image: DynamicImage) -> DynamicImage {
-    let (width, height) = image.dimensions();
+  let (width, height) = image.dimensions();
 
-    let mut x;
-    let mut y;
-    let mut size;
+  // Determine starting point and size
+  let (x, y, size) = if width > height {
+      ((width - height) / 2, 0, height)
+  } else {
+      (0, (height - width) / 2, width)
+  };
 
-    if width > height {
-      x = (width - height) / 2;
-      y = 0 as u32;
-      size = height;
-    }
-    else {
-      x = 0 as u32;
-      y = (height - width) / 2;
-      size = width;
-    }
-    
-    let cropped = image.clone().crop(x, y, size, size);
-    return cropped   
+  // Crop the image to square
+  image.clone().crop(x, y, size, size)
 }
