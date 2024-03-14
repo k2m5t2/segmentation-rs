@@ -20,6 +20,7 @@ use image::imageops::FilterType;
 use ort::{Session, GraphOptimizationLevel};
 
 mod yolo;
+mod rt_detr;
 mod utils2;
 
 struct Detr {
@@ -65,6 +66,9 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let yolo_model = yolo::Yolo::new()?;
     yolo_model.process();
+
+    let rt_detr_model = rt_detr::RtDetr::new()?;
+    rt_detr_model.process();
 
 
     Ok(())

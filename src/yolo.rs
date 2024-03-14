@@ -36,7 +36,7 @@ pub struct Yolo {
 impl Yolo {
     pub fn new() -> Result<Self, Box<dyn Error>> {
         // let file = PathBuf::from("./assets/onnx/yolov8m-seg.onnx"); // ALT1
-        let file = PathBuf::from("./assets/onnx/yolov8m-seg_json.onnx"); // ALT1.1
+        let file = PathBuf::from("./assets/onnx/yolo/yolov8m-seg_json.onnx"); // ALT1.1
         // let file = PathBuf::from("./assets/onnx/yolov9c.onnx"); // ALT2
         let model = Session::builder()?
             .with_optimization_level(GraphOptimizationLevel::Level3)?
@@ -71,7 +71,7 @@ impl Yolo {
         let output1_view = output1.view().clone().into_owned();
         
         // post-process predictions
-        println!("{:?}", output0_view);
+        // println!("{:?}", output0_view); // WARD this is where I paused!
         // println!("{:?}", output0_view.slice(s![0, 0, ..]));
 
         // label
